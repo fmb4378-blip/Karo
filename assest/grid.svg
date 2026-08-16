@@ -1,3 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
-<defs><pattern id="p" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M80 0H0V80" fill="none" stroke="#8c67ff" stroke-opacity=".09"/></pattern><radialGradient id="v"><stop stop-color="#35136a" stop-opacity=".55"/><stop offset="1" stop-color="#05050b" stop-opacity="0"/></radialGradient></defs>
-<rect width="1600" height="900" fill="#05050b"/><rect width="1600" height="900" fill="url(#p)"/><ellipse cx="800" cy="420" rx="650" ry="420" fill="url(#v)"/></svg>
