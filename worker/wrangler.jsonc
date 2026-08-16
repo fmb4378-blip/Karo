@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dost-ai",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-01",
+  "assets": { "directory": "../", "binding": "ASSETS", "not_found_handling": "single-page-application" },
+  "ai": { "binding": "AI" },
+  "vars": {
+    "OPENROUTER_MODEL": "openai/gpt-oss-120b",
+    "WORKERS_AI_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast"
+  }
+}
