@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05050b">
+<meta name="description" content="Karo AI — a thinking workspace for students, developers, cybersecurity learners and job seekers.">
+<title>Karo AI — Thinking Workspace</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="progress"><span id="progress"></span></div>
+
+<header class="nav">
+  <a class="brand" href="#top"><span class="brandmark">✦</span><span>Karo <i>AI</i></span></a>
+  <nav><a href="#capabilities">Capabilities</a><a href="#how">How it works</a><a href="#workspace">Workspace</a><a href="#career">Career</a></nav>
+  <a class="nav-cta" href="#workspace">Open Karo <b>↗</b></a>
+</header>
+
+<main id="top">
+<section class="hero reveal">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="dot"></span> AI WORKSPACE FOR REAL WORK</div>
+    <h1>Think deeper.<br><em>Build faster.</em><br>Move forward.</h1>
+    <p>Karo is a focused AI workspace for students, developers, cybersecurity learners and job seekers — turning questions, code, skills and your CV into useful next steps.</p>
+    <div class="actions"><a class="primary" href="#workspace">Enter the workspace <span>→</span></a><a class="secondary" href="#how"><span class="play">▶</span> See how it works</a></div>
+    <div class="chips"><span>+ Study</span><span>+ Code</span><span>+ Cyber</span><span>+ Career</span></div>
+  </div>
+  <div class="hero-visual">
+    <div class="orbital orbit-a"></div><div class="orbital orbit-b"></div>
+    <img src="assets/hero-core.svg" alt="Karo AI core visualization">
+    <div class="float-card fc1"><small>DEVELOPER COPILOT</small><strong>Debugging → Fix</strong><span class="bar"></span></div>
+    <div class="float-card fc2"><small>CYBER LAB</small><strong><b>●</b> Safe practice mode</strong></div>
+    <div class="float-card fc3"><small>STUDY MENTOR</small><strong>Concept → clear</strong><span class="bar purple"></span></div>
+    <div class="mode">AI MODE <b>AUTO</b></div>
+  </div>
+</section>
+
+<div class="ticker"><span>STUDY</span>✦<span>CODE</span>✦<span>CYBERSECURITY</span>✦<span>CV ANALYSIS</span>✦<span>JOB MATCHING</span>✦<span>RESEARCH</span></div>
+
+<section id="capabilities" class="section reveal">
+  <div class="section-head"><div><div class="eyebrow">ONE COPILOT · MANY MODES</div><h2>More than an assistant.<br><em>A thinking workspace.</em></h2></div><p>Karo changes how it helps depending on what you're trying to accomplish.</p></div>
+  <div class="cards">
+    <article class="cap-card tilt"><div class="card-bg" style="background-image:url('assets/career-space.svg')"></div><div class="card-content"><span class="num">01 · BUILD</span><h3>Developer<br>Copilot</h3><p>Debug code, explain errors, refactor and plan builds without losing the context.</p><code>karo › explain ./app.js<br>✓ 3 issues found · 2 fixes ready</code></div></article>
+    <article class="cap-card tilt"><div class="card-bg" style="background-image:url('assets/cyber-lab.svg')"></div><div class="card-content"><span class="num">02 · DEFEND</span><h3>Cyber<br>Learning Lab</h3><p>Learn security concepts, analyze safe examples and practice defensive thinking.</p><b class="tag">ETHICAL · EDUCATIONAL</b></div></article>
+    <article class="cap-card tilt"><div class="card-bg" style="background-image:url('assets/study-space.svg')"></div><div class="card-content"><span class="num">03 · LEARN</span><h3>Study<br>Mentor</h3><p>Break difficult topics into explanations, examples, quizzes and practice sessions.</p><span class="meter"></span></div></article>
+    <article id="career" class="cap-card tilt"><div class="card-bg" style="background-image:url('assets/career-space.svg')"></div><div class="card-content"><span class="num">04 · CAREER</span><h3>Career<br>Navigator</h3><p>Upload your CV, choose your target country and get AI-matched roles with skill-gap guidance.</p><b class="tag">CV → PROFILE → MATCHES</b></div></article>
+  </div>
+</section>
+
+<section id="how" class="story reveal">
+  <div class="story-sticky"><div class="eyebrow">THE FLOW</div><h2>One question.<br><em>Four ways forward.</em></h2><p>Scroll through the workflow. The interface shifts as Karo understands your intent.</p></div>
+  <div class="story-steps">
+    <div class="step active"><span>01</span><div><h3>Tell Karo what you're trying to do</h3><p>Ask naturally. No need to choose a complicated prompt template.</p></div></div>
+    <div class="step"><span>02</span><div><h3>Karo detects the right mode</h3><p>Study, code, cyber or career — the workspace adapts around your goal.</p></div></div>
+    <div class="step"><span>03</span><div><h3>Work inside a focused canvas</h3><p>Keep explanations, code, notes, files and next actions together.</p></div></div>
+    <div class="step"><span>04</span><div><h3>Leave with a next step</h3><p>Not just an answer — something useful you can actually do.</p></div></div>
+  </div>
+</section>
+
+<section id="workspace" class="workspace reveal">
+  <div class="workspace-top"><div><div class="eyebrow">LIVE WORKSPACE PREVIEW</div><h2>Try the interface.<br><em>Right here.</em></h2></div><span class="live"><i></i> LIVE DEMO</span></div>
+  <div class="demo-shell">
+    <aside class="demo-sidebar">
+      <div class="mini-brand">✦ Karo</div>
+      <button class="mode-btn active" data-mode="study">◈ Study</button>
+      <button class="mode-btn" data-mode="code">⌘ Code</button>
+      <button class="mode-btn" data-mode="cyber">◉ Cyber</button>
+      <button class="mode-btn" data-mode="career">◇ Career</button>
+      <div class="side-note">Adaptive mode<br><b>ON</b></div>
+    </aside>
+    <div class="demo-main">
+      <div class="demo-bar"><span id="demoTitle">Study Mentor</span><span>•••</span></div>
+      <div class="demo-body">
+        <div class="prompt">What do you want to work on?</div>
+        <div class="demo-response" id="demoResponse">Explain a difficult topic step-by-step, then give me a short quiz.</div>
+        <div class="suggestions"><button data-prompt="Explain subnetting simply">Explain subnetting simply</button><button data-prompt="Review my code">Review my code</button><button data-prompt="Analyze this threat safely">Analyze this threat safely</button></div>
+        <div class="demo-input"><span id="typed">Type a request…</span><button id="sendDemo">↑</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visual-break reveal">
+  <div class="break-copy"><div class="eyebrow">CYBER LAB</div><h2>Practice the thinking,<br><em>not the damage.</em></h2><p>Defensive scenarios, safe simulations and clear explanations designed for learning.</p><a href="#workspace" class="primary">Open Cyber Mode →</a></div>
+  <div class="break-art"><img src="assets/cyber-lab.svg" alt="Cybersecurity learning lab visualization"></div>
+</section>
+
+<section class="visual-break reverse reveal">
+  <div class="break-copy"><div class="eyebrow">STUDY MENTOR</div><h2>Turn “I don't get it”<br><em>into “I can explain it.”</em></h2><p>Layered explanations, examples and quick checks that move with your pace.</p><a href="#workspace" class="secondary">Try Study Mode →</a></div>
+  <div class="break-art"><img src="assets/study-space.svg" alt="Study workspace visualization"></div>
+</section>
+
+<section class="final-cta reveal">
+  <div class="eyebrow">YOUR NEXT MOVE</div><h2>Build. Learn. Defend.<br><em>Find your way forward.</em></h2><p>One workspace for the work that actually matters.</p><a class="primary" href="#workspace">Enter Karo <span>→</span></a>
+</section>
+</main>
+
+<footer><span>© 2026 Karo AI</span><span>Study · Code · Cyber · Career</span><span>Designed as a focused AI workspace</span></footer>
+<script src="app.js"></script>
+</body>
+</html>
