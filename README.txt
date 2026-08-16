@@ -1,0 +1,1 @@
+Optional local assets can be placed here. The current design is intentionally image-free and uses CSS-generated visual elements for a clean futuristic look.
