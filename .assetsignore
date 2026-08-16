@@ -1,0 +1,10 @@
+worker/
+api/
+node_modules/
+.wrangler/
+.git/
+*.md
+*.jsonc
+.gitignore
+.dev.vars
+.env
