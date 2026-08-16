@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KARO AI</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+    }
+
+    .app {
+      max-width: 700px;
+      margin: auto;
+      min-height: 100vh;
+      padding: 25px 18px;
+    }
+
+    header {
+      text-align: center;
+      padding: 35px 10px 25px;
+    }
+
+    .logo {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+
+    .tagline {
+      color: #6b7280;
+      margin-top: 8px;
+      font-size: 16px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+      margin-top: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 130px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 15px;
+      font-size: 16px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #111827;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 15px;
+      border: none;
+      border-radius: 14px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .examples {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .example {
+      background: #f3f4f6;
+      padding: 13px;
+      border-radius: 12px;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 15px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <header>
+      <div class="logo">KARO</div>
+      <div class="tagline">Bas batao kya karna hai.</div>
+    </header>
+
+    <div class="card">
+
+      <textarea
+        id="userInput"
+        placeholder="Apni problem ya kaam yahan likho...">
+      </textarea>
+
+      <button onclick="startKaro()">
+        KARO se poochho
+      </button>
+
+      <div class="status" id="status"></div>
+
+      <div class="examples">
+        <div class="example">
+          📚 "Meri study ko organize kar do."
+        </div>
+
+        <div class="example">
+          📄 "Is document ko simple language mein samjhao."
+        </div>
+
+        <div class="example">
+          🧠 "Mujhe is topic ka test bana do."
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function startKaro() {
+
+      const input = document.getElementById("userInput").value.trim();
+      const status = document.getElementById("status");
+
+      if (!input) {
+        status.innerText = "Pehle apna kaam ya problem likho.";
+        return;
+      }
+
+      status.innerText =
+        "KARO samajh raha hai... AI connection next step mein add karenge.";
+
+    }
+  </script>
+
+</body>
+</html>
