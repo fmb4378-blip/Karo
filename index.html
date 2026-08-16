@@ -3,162 +3,627 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KARO AI</title>
+
+  <title>KARO — AI Movie Assistant</title>
 
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #050509;
+      --text: #ffffff;
+      --muted: #a7a7b5;
+      --glass: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.12);
     }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #111827;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(96,70,255,0.22), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(0,210,255,0.15), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(150,0,255,0.18), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
     }
+
+    /* Animated background */
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.45;
+      animation: floatStar linear infinite;
+    }
+
+    .star:nth-child(1) { left: 10%; top: 20%; animation-duration: 8s; }
+    .star:nth-child(2) { left: 25%; top: 70%; animation-duration: 11s; }
+    .star:nth-child(3) { left: 45%; top: 15%; animation-duration: 9s; }
+    .star:nth-child(4) { left: 65%; top: 60%; animation-duration: 13s; }
+    .star:nth-child(5) { left: 80%; top: 25%; animation-duration: 10s; }
+    .star:nth-child(6) { left: 90%; top: 80%; animation-duration: 12s; }
+    .star:nth-child(7) { left: 55%; top: 85%; animation-duration: 15s; }
+    .star:nth-child(8) { left: 15%; top: 45%; animation-duration: 14s; }
+
+    @keyframes floatStar {
+      0%,100% {
+        transform: translateY(0) scale(1);
+        opacity: .25;
+      }
+      50% {
+        transform: translateY(-30px) scale(1.7);
+        opacity: .8;
+      }
+    }
+
+    /* Main */
 
     .app {
-      max-width: 700px;
-      margin: auto;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 900px;
       min-height: 100vh;
-      padding: 25px 18px;
+      margin: auto;
+      padding: 25px 18px 50px;
     }
 
-    header {
-      text-align: center;
-      padding: 35px 10px 25px;
+    /* Top bar */
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 5px;
     }
 
-    .logo {
-      font-size: 42px;
+    .mini-logo {
+      font-size: 15px;
       font-weight: 800;
-      letter-spacing: -2px;
+      letter-spacing: 4px;
+      opacity: .9;
     }
 
-    .tagline {
-      color: #6b7280;
-      margin-top: 8px;
-      font-size: 16px;
+    .online {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #a8ffcc;
+      font-size: 12px;
     }
+
+    .online-dot {
+      width: 7px;
+      height: 7px;
+      background: #42ff9a;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #42ff9a;
+    }
+
+    /* Hero */
+
+    .hero {
+      text-align: center;
+      padding: 55px 10px 35px;
+      perspective: 1000px;
+    }
+
+    .orb {
+      width: 150px;
+      height: 150px;
+      margin: auto;
+      border-radius: 50%;
+      position: relative;
+
+      background:
+        radial-gradient(circle at 35% 25%,
+          #ffffff 0%,
+          #9f8cff 8%,
+          #604dff 28%,
+          #24135e 58%,
+          #080612 75%);
+
+      box-shadow:
+        0 0 30px rgba(105,75,255,.7),
+        0 0 80px rgba(105,75,255,.35),
+        inset -25px -25px 45px rgba(0,0,0,.65);
+
+      animation: orbFloat 5s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+
+    .orb::before {
+      content: "";
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1px solid rgba(150,130,255,.35);
+      box-shadow:
+        0 0 25px rgba(100,80,255,.3);
+      animation: ring 7s linear infinite;
+    }
+
+    .orb::after {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 25px;
+      left: 25px;
+      top: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      filter: blur(12px);
+      transform: rotate(-25deg);
+    }
+
+    @keyframes orbFloat {
+      0%,100% {
+        transform: translateY(0) rotateX(0deg) rotateY(0deg);
+      }
+      50% {
+        transform: translateY(-13px) rotateX(8deg) rotateY(12deg);
+      }
+    }
+
+    @keyframes ring {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .brand {
+      margin-top: 28px;
+      font-size: clamp(55px, 15vw, 105px);
+      line-height: .9;
+      font-weight: 900;
+      letter-spacing: -7px;
+
+      background:
+        linear-gradient(
+          120deg,
+          #ffffff,
+          #a99cff 35%,
+          #6b55ff 60%,
+          #ffffff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      text-shadow:
+        0 10px 35px rgba(91,70,255,.35);
+
+      transform: perspective(700px) rotateX(8deg);
+    }
+
+    .subtitle {
+      margin-top: 18px;
+      font-size: 16px;
+      color: var(--muted);
+      letter-spacing: .5px;
+    }
+
+    .subtitle strong {
+      color: white;
+    }
+
+    /* Main card */
 
     .card {
-      background: white;
-      border-radius: 20px;
+      position: relative;
+      margin-top: 30px;
+      padding: 2px;
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(139,119,255,.6),
+          rgba(255,255,255,.08),
+          rgba(0,220,255,.35)
+        );
+
+      box-shadow:
+        0 25px 80px rgba(0,0,0,.45);
+    }
+
+    .card-inner {
       padding: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
-      margin-top: 20px;
+      border-radius: 23px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(25,25,40,.96),
+          rgba(9,9,16,.96)
+        );
+
+      backdrop-filter: blur(25px);
     }
 
     textarea {
       width: 100%;
-      min-height: 130px;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 15px;
-      font-size: 16px;
-      resize: vertical;
+      min-height: 145px;
+
+      border: none;
       outline: none;
+      resize: vertical;
+
+      color: white;
+      background: rgba(255,255,255,.045);
+
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+
+      padding: 18px;
+
+      font-size: 16px;
+      line-height: 1.5;
+
+      box-shadow:
+        inset 0 0 30px rgba(0,0,0,.2);
+
+      transition: .25s;
     }
 
     textarea:focus {
-      border-color: #111827;
+      border-color: rgba(130,110,255,.7);
+      box-shadow:
+        0 0 30px rgba(90,70,255,.12),
+        inset 0 0 30px rgba(0,0,0,.25);
     }
 
-    button {
+    textarea::placeholder {
+      color: #747486;
+    }
+
+    /* Button */
+
+    .ask {
+      position: relative;
       width: 100%;
-      margin-top: 12px;
-      padding: 15px;
+      margin-top: 13px;
+      padding: 17px;
+
       border: none;
-      border-radius: 14px;
-      background: #111827;
+      border-radius: 16px;
+
       color: white;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: .3px;
+
+      background:
+        linear-gradient(
+          110deg,
+          #5d45ff,
+          #8a65ff,
+          #4169ff
+        );
+
+      box-shadow:
+        0 12px 30px rgba(86,65,255,.35);
+
       cursor: pointer;
+      overflow: hidden;
+
+      transition: transform .2s, box-shadow .2s;
     }
 
-    button:active {
-      transform: scale(0.98);
+    .ask::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 70%;
+      height: 100%;
+
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+      );
+
+      transform: skewX(-20deg);
+      transition: .7s;
+    }
+
+    .ask:hover::before {
+      left: 130%;
+    }
+
+    .ask:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 17px 40px rgba(86,65,255,.5);
+    }
+
+    .ask:active {
+      transform: scale(.98);
+    }
+
+    /* Examples */
+
+    .label {
+      margin: 25px 2px 12px;
+      color: #777789;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
     .examples {
       display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-top: 20px;
     }
 
     .example {
-      background: #f3f4f6;
-      padding: 13px;
-      border-radius: 12px;
-      color: #374151;
-      font-size: 14px;
+      padding: 15px;
+      border-radius: 15px;
+
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.07);
+
+      color: #c9c9d5;
+      font-size: 13px;
+      line-height: 1.45;
+
+      transition: .25s;
+      cursor: pointer;
+    }
+
+    .example:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(130,110,255,.4);
+    }
+
+    /* Response */
+
+    .response {
+      display: none;
+      margin-top: 15px;
+      padding: 18px;
+
+      border-radius: 17px;
+
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.08);
+
+      color: #d8d8e4;
+      line-height: 1.6;
+    }
+
+    .response.show {
+      display: block;
+      animation: responseIn .4s ease;
+    }
+
+    @keyframes responseIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .status {
       text-align: center;
-      margin-top: 15px;
-      color: #6b7280;
-      font-size: 14px;
+      margin-top: 12px;
+      min-height: 18px;
+      color: #89899b;
+      font-size: 12px;
+    }
+
+    /* Footer */
+
+    footer {
+      text-align: center;
+      margin-top: 35px;
+      color: #5e5e6d;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 650px) {
+
+      .app {
+        padding-left: 13px;
+        padding-right: 13px;
+      }
+
+      .hero {
+        padding-top: 45px;
+      }
+
+      .orb {
+        width: 120px;
+        height: 120px;
+      }
+
+      .brand {
+        letter-spacing: -5px;
+      }
+
+      .examples {
+        grid-template-columns: 1fr;
+      }
+
+      .example {
+        padding: 13px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="app">
-
-    <header>
-      <div class="logo">KARO</div>
-      <div class="tagline">Bas batao kya karna hai.</div>
-    </header>
-
-    <div class="card">
-
-      <textarea
-        id="userInput"
-        placeholder="Apni problem ya kaam yahan likho...">
-      </textarea>
-
-      <button onclick="startKaro()">
-        KARO se poochho
-      </button>
-
-      <div class="status" id="status"></div>
-
-      <div class="examples">
-        <div class="example">
-          📚 "Meri study ko organize kar do."
-        </div>
-
-        <div class="example">
-          📄 "Is document ko simple language mein samjhao."
-        </div>
-
-        <div class="example">
-          🧠 "Mujhe is topic ka test bana do."
-        </div>
-      </div>
-
-    </div>
-
+  <div class="stars">
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
   </div>
 
+  <main class="app">
+
+    <div class="topbar">
+      <div class="mini-logo">KARO / AI</div>
+
+      <div class="online">
+        <span class="online-dot"></span>
+        ONLINE
+      </div>
+    </div>
+
+    <section class="hero">
+
+      <div class="orb"></div>
+
+      <h1 class="brand">KARO</h1>
+
+      <p class="subtitle">
+        Your <strong>AI Movie Assistant.</strong><br>
+        Imagine it. Ask it. KARO it.
+      </p>
+
+    </section>
+
+    <section class="card">
+
+      <div class="card-inner">
+
+        <textarea
+          id="userInput"
+          placeholder="Tell KARO what you want to do...&#10;&#10;Example: Explain this movie scene, create a story, find a movie, write dialogue..."
+        ></textarea>
+
+        <button class="ask" onclick="startKaro()">
+          ✦  ASK KARO
+        </button>
+
+        <div class="status" id="status"></div>
+
+        <div class="response" id="response"></div>
+
+        <div class="label">
+          Try something
+        </div>
+
+        <div class="examples">
+
+          <div
+            class="example"
+            onclick="useExample('Explain the most important scene in Interstellar in simple language.')"
+          >
+            🎬 Explain a movie scene
+          </div>
+
+          <div
+            class="example"
+            onclick="useExample('Create a cinematic story about a person who discovers a mysterious AI.')"
+          >
+            🎥 Create a cinematic story
+          </div>
+
+          <div
+            class="example"
+            onclick="useExample('Help me choose a movie for tonight based on my mood.')"
+          >
+            🍿 Choose a movie
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <footer>
+      KARO AI · THE BEGINNING OF SOMETHING BIG
+    </footer>
+
+  </main>
+
+
   <script>
+
+    function useExample(text) {
+      document.getElementById("userInput").value = text;
+      document.getElementById("userInput").focus();
+    }
+
+
     function startKaro() {
 
-      const input = document.getElementById("userInput").value.trim();
-      const status = document.getElementById("status");
+      const input =
+        document.getElementById("userInput").value.trim();
+
+      const status =
+        document.getElementById("status");
+
+      const response =
+        document.getElementById("response");
+
 
       if (!input) {
-        status.innerText = "Pehle apna kaam ya problem likho.";
+
+        status.innerText =
+          "Tell KARO what you need.";
+
         return;
       }
 
+
       status.innerText =
-        "KARO samajh raha hai... AI connection next step mein add karenge.";
+        "KARO is preparing your answer...";
+
+      response.classList.remove("show");
+
+      setTimeout(() => {
+
+        status.innerText = "";
+
+        response.innerText =
+          "KARO is ready. The AI brain will be connected here next. 🧠";
+
+        response.classList.add("show");
+
+      }, 900);
 
     }
+
   </script>
 
 </body>
